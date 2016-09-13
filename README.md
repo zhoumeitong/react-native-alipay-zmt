@@ -19,7 +19,7 @@
 https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103676&docType=1
 
 1、引入系统库
-左侧目录中选中工程名，在TARGETS->Build Settings-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中查找并选择所需的库（见下图），单击“Add”按钮，将库文件添加到工程中。
+左侧目录中选中工程名，在TARGETS->Build Phases-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中查找并选择所需的库（见下图），单击“Add”按钮，将库文件添加到工程中。
 
 ![](http://upload-images.jianshu.io/upload_images/2093433-0d20a15bea8a4016.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
