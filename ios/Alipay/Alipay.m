@@ -52,12 +52,12 @@ RCT_REMAP_METHOD(pay, payInfo:(NSString *)payInfo resolver:(RCTPromiseResolveBlo
     if([resultStatus isEqualToString:@"6001"])
     { //用户取消
         NSLog(@"已取消支付");
-        _resolve(@[result]);
+        _resolve(@"已取消支付");
     }
     else if ([resultStatus isEqualToString:@"9000"])
     { //验证签名成功，交易结果无篡改
         NSLog(@"支付成功");
-        _resolve(@[result]);
+        _resolve(@"支付成功");
     }
     else
     {
