@@ -67,10 +67,9 @@ return NO;
 */
 
 import React, { Component } from 'react';
-import { NativeModules } from 'react-native';
-
-
-var Alipay = NativeModules.Alipay;
+// import { NativeModules } from 'react-native';
+// var Alipay = NativeModules.Alipay;
+import Alipay from 'react-native-alipay';
 
 function show(title, msg) {
 AlertIOS.alert(title+'', msg+'');
