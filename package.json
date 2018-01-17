@@ -1,6 +1,23 @@
 {
-  "name": "react-native-alipay",
-  "version": "0.0.1",
-  "description": " Alipay For React Native",
-  "main": "index.js"
+  "name": "react-native-alipay-zmt",
+  "version": "1.0.0",
+  "description": " Alipay For React Native ios",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhoumeitong/react-native-alipay-zmt.git"
+  },
+  "keywords": [
+    "alipay",
+    "ios"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhoumeitong/react-native-alipay-zmt/issues"
+  },
+  "homepage": "https://github.com/zhoumeitong/react-native-alipay-zmt#readme"
 }

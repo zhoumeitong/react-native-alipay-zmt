@@ -5,14 +5,6 @@
  */
 
 import React, { Component } from 'react';
-// import { NativeModules } from 'react-native';
-// var Alipay = NativeModules.Alipay;
-import Alipay from 'react-native-alipay';
-
-function show(title, msg) {
-    AlertIOS.alert(title+'', msg+'');
-}
-
 import {
   AppRegistry,
   StyleSheet,
@@ -24,6 +16,13 @@ import {
   TouchableHighlight,
   NativeAppEventEmitter
 } from 'react-native';
+
+import Alipay from 'react-native-alipay-zmt';
+
+function show(title, msg) {
+    AlertIOS.alert(title+'', msg+'');
+}
+
 
 class TextReactNative extends Component {
 
