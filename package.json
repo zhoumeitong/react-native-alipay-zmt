@@ -1,6 +1,6 @@
 {
   "name": "react-native-alipay-zmt",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": " Alipay For React Native ios",
   "main": "index.js",
   "scripts": {

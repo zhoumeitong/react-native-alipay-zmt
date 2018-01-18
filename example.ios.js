@@ -24,11 +24,11 @@ function show(title, msg) {
 }
 
 
-class TextReactNative extends Component {
+export default class App extends Component {
 
     Alipay(){
 
-      Alipay.pay("body=\"商品订单支付\"&total_fee=\"0.01\"&seller_id=\"zhongkefuchuang@126.com\"&notify_url=\"http%3A%2F%2Fweb.jinlb.cn%2Feten%2Fapp%2Fcharge%2Falipay%2Fnotify\"&out_trade_no=\"PO2016072900000071\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&partner=\"2088211510687520\"&_input_charset=\"utf-8\"&subject=\"商品订单\"&sign=\"f7oDTfExzbFjGWCj94weGWEEi3nZ6tTY7lZq%2Fpz%2Fl%2BUSm69Ara74E8K5dZInuYGNX4NyauAQBnkgRjmWcoPHFB3E6wQnJdD5eF%2FgPIHq4%2FrzN7mTC3fmhngHuU%2FbmKu6NzofZwz2nfloR8MCKnsCueNcDHWIECUQ5zBRzx3aBsw%3D\"&sign_type=\"RSA\"")
+      Alipay.pay("app_id=2015052600090779&biz_content=%7B%22timeout_express%22%3A%2230m%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22total_amount%22%3A%220.01%22%2C%22subject%22%3A%221%22%2C%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22IQJZSRC1YMQB5HU%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2Fdomain.merchant.com%2Fpayment_notify&sign_type=RSA2&timestamp=2016-08-25%2020%3A26%3A31&version=1.0&sign=cYmuUnKi5QdBsoZEAbMXVMmRWjsuUj%2By48A2DvWAVVBuYkiBj13CFDHu2vZQvmOfkjE0YqCUQE04kqm9Xg3tIX8tPeIGIFtsIyp%2FM45w1ZsDOiduBbduGfRo1XRsvAyVAv2hCrBLLrDI5Vi7uZZ77Lo5J0PpUUWwyQGt0M4cj8g%3D")
        .then(result => {
       console.log("result is ", result);
       show("result is ", result);
@@ -84,6 +84,3 @@ const styles = StyleSheet.create({
     }
   
 });
-
-
-AppRegistry.registerComponent('TextReactNative', () => TextReactNative);

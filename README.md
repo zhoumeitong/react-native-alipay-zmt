@@ -1,5 +1,5 @@
 ### 功能：
-通过支付宝SDK实现APP支付宝支付功能
+通过支付宝SDK（新版）实现APP支付宝支付功能
 
 ### 使用步骤：
 
@@ -16,9 +16,9 @@
 
 ##### 自动添加：
 ```
-npm install react-native-alipay-zmt@1.0.0 --save
+npm install react-native-alipay-zmt --save
 或
-yarn add react-native-alipay-zmt@1.0.0
+yarn add react-native-alipay-zmt
 
 react-native link
 ```
@@ -26,8 +26,7 @@ react-native link
 由于AppDelegate中使用Alipay库,所以我们需要打开你的工程文件，选择Build Settings，然后搜索Search Paths，然后添加库所在的目录`$(SRCROOT)/../node_modules/react-native-alipay-zmt/ios/Alipay`(包含头文件搜索和库文件搜索)
 
 #### 二、开发环境配置
-参考
-https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103676&docType=1
+参考：https://docs.open.alipay.com/204/105295/
 
 1、引入系统库
 左侧目录中选中工程名，在TARGETS->Build Phases-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中查找并选择所需的库（见下图），单击“Add”按钮，将库文件添加到工程中。
@@ -46,29 +45,28 @@ https://doc.open.alipay.com/doc2/detail?treeId=59&articleId=103676&docType=1
 
 ![](http://upload-images.jianshu.io/upload_images/2093433-8677477232f6648d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#### 三、配置plist文件
 
-![](http://upload-images.jianshu.io/upload_images/2093433-784afb58dd0143aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-iOS9为了增强数据访问安全，将所有的http请求都改为了https，为了能够在iOS9中正常使用地图SDK，请在"Info.plist"中进行如下配置，否则影响SDK的使用。
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-<key>NSAllowsArbitraryLoads</key>
-<true/>
-</dict>
-
-```
-
-#### 四、简单使用
+#### 三、简单使用
 
 1、重写AppDelegate的openURL方法：
 ```
 #import "Alipay.h"
 
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-if ([options[@"UIApplicationOpenURLOptionsSourceApplicationKey"]   isEqualToString:@"com.alipay.iphoneclient"]) {
+if ([sourceApplication isEqualToString:@"com.alipay.iphoneclient"]) {
+[Alipay aliPayParse:url];
+return YES;
+}else{
+return NO;
+}
+}
+
+
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+if ([options[@"UIApplicationOpenURLOptionsSourceApplicationKey"]  isEqualToString:@"com.alipay.iphoneclient"]) {
 [Alipay aliPayParse:url];
 return YES;
 }else{
@@ -85,14 +83,6 @@ return NO;
 */
 
 import React, { Component } from 'react';
-// import { NativeModules } from 'react-native';
-// var Alipay = NativeModules.Alipay;
-import Alipay from 'react-native-alipay-zmt';
-
-function show(title, msg) {
-AlertIOS.alert(title+'', msg+'');
-}
-
 import {
 AppRegistry,
 StyleSheet,
@@ -105,11 +95,17 @@ TouchableHighlight,
 NativeAppEventEmitter
 } from 'react-native';
 
-class TextReactNative extends Component {
+import Alipay from 'react-native-alipay-zmt';
+
+function show(title, msg) {
+AlertIOS.alert(title+'', msg+'');
+}
+
+export default class App extends Component {
 
 Alipay(){
 
-Alipay.pay("body=\"商品订单支付\"&total_fee=\"1.6\"&seller_id=\"zhongkefuchuang@126.com\"&notify_url=\"http%3A%2F%2Fweb.jinlb.cn%2Feten%2Fapp%2Fcharge%2Falipay%2Fnotify\"&out_trade_no=\"PO2016081100000014\"&service=\"mobile.securitypay.pay\"&payment_type=\"1\"&partner=\"2088211510687520\"&_input_charset=\"utf-8\"&subject=\"商品订单\"&sign=\"qMTEJRy%2FX3UpevA2b2mzdjLi8QSEp%2F69jpIT46vkOziWXDllEHXBUMqrJXdoAdiS2COodhXkMMwKrEy8FhK2XSQF6fFGsOkcS3duwPuHxsLcq5Q5JqsztWovIekPDvM8e9Yi%2BMzPethaxMQCJluiMuBvU9KBrK%2FlBUq20s2Pa5k%3D\"&sign_type=\"RSA\"")
+Alipay.pay("app_id=2015052600090779&biz_content=%7B%22timeout_express%22%3A%2230m%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22total_amount%22%3A%220.01%22%2C%22subject%22%3A%221%22%2C%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22IQJZSRC1YMQB5HU%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2Fdomain.merchant.com%2Fpayment_notify&sign_type=RSA2&timestamp=2016-08-25%2020%3A26%3A31&version=1.0&sign=cYmuUnKi5QdBsoZEAbMXVMmRWjsuUj%2By48A2DvWAVVBuYkiBj13CFDHu2vZQvmOfkjE0YqCUQE04kqm9Xg3tIX8tPeIGIFtsIyp%2FM45w1ZsDOiduBbduGfRo1XRsvAyVAv2hCrBLLrDI5Vi7uZZ77Lo5J0PpUUWwyQGt0M4cj8g%3D")
 .then(result => {
 console.log("result is ", result);
 show("result is ", result);
@@ -166,7 +162,4 @@ color: '#fff'
 
 });
 
-
-AppRegistry.registerComponent('TextReactNative', () => TextReactNative);
 ```
-
