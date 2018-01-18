@@ -9,8 +9,11 @@
 
 ##### 手动添加：
 1、添加react-native-alipay-zmt插件到你工程的node_modules文件夹下
+
 2、添加Alipay库中的.xcodeproj文件在你的工程中
+
 3、点击你的主工程文件，选择Build Phases，然后把刚才所添加进去的.xcodeproj下的Products文件夹中的静态库文件（.a文件），拖到Link Binary With Libraries组内。
+
 4、由于AppDelegate中使用Alipay库,所以我们需要打开你的工程文件，选择Build Settings，然后搜索Search Paths，然后添加库所在的目录`$(SRCROOT)/../node_modules/react-native-alipay-zmt/ios/Alipay`(包含头文件搜索和库文件搜索)
 
 ##### 自动添加：
