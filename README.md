@@ -14,8 +14,6 @@
 
 3、点击你的主工程文件，选择Build Phases，然后把刚才所添加进去的.xcodeproj下的Products文件夹中的静态库文件（.a文件），拖到Link Binary With Libraries组内。
 
-4、由于AppDelegate中使用Alipay库,所以我们需要打开你的工程文件，选择Build Settings，然后搜索Search Paths，然后添加库所在的目录`$(SRCROOT)/../node_modules/react-native-alipay-zmt/ios/Alipay`(包含头文件搜索和库文件搜索)
-
 ##### 自动添加：
 ```
 npm install react-native-alipay-zmt --save
@@ -24,6 +22,8 @@ yarn add react-native-alipay-zmt
 
 react-native link
 ```
+
+由于AppDelegate中使用Alipay库,所以我们需要打开你的工程文件，选择Build Settings，然后搜索Search Paths，然后添加库所在的目录`$(SRCROOT)/../node_modules/react-native-alipay-zmt/ios/Alipay`(包含头文件搜索和库文件搜索)
 
 #### 二、开发环境配置
 参考
