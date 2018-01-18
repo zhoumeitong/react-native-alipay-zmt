@@ -16,9 +16,9 @@
 
 ##### 自动添加：
 ```
-npm install react-native-alipay-zmt --save
+npm install react-native-alipay-zmt@1.0.0 --save
 或
-yarn add react-native-alipay-zmt
+yarn add react-native-alipay-zmt@1.0.0
 
 react-native link
 ```
