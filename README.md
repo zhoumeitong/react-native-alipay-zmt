@@ -8,47 +8,72 @@
 参考：https://reactnative.cn/docs/0.50/linking-libraries-ios.html#content
 
 ##### 手动添加：
-1、添加react-native-alipay-zmt插件到你工程的node_modules文件夹下
 
-2、添加Alipay库中的.xcodeproj文件在你的工程中
+1、添加`react-native-alipay-zmt`插件到你工程的`node_modules`文件夹下
 
-3、点击你的主工程文件，选择Build Phases，然后把刚才所添加进去的.xcodeproj下的Products文件夹中的静态库文件（.a文件），拖到Link Binary With Libraries组内。
+2、添加`Alipay`库中的`.xcodeproj`文件在你的工程中
+
+3、点击你的主工程文件，选择`Build Phases`，然后把刚才所添加进去的`.xcodeproj`下的`Products`文件夹中的静态库文件（.a文件），拖到`Link Binary With Libraries`组内。
 
 ##### 自动添加：
+
 ```
-npm install react-native-alipay-zmt --save
+npm install react-native-alipay-zmt --save 
 或
 yarn add react-native-alipay-zmt
 
 react-native link
 ```
 
-由于AppDelegate中使用Alipay库,所以我们需要打开你的工程文件，选择Build Settings，然后搜索Search Paths，然后添加库所在的目录`$(SRCROOT)/../node_modules/react-native-alipay-zmt/ios/Alipay`(包含头文件搜索和库文件搜索)
+由于`AppDelegate`中使用`Alipay`库,所以我们需要打开你的工程文件，选择`Build Settings`，然后搜索`Search Paths`，然后添加库所在的目录`$(SRCROOT)/../node_modules/react-native-alipay-zmt/ios/Alipay`(包含头文件搜索和库文件搜索)
 
 #### 二、开发环境配置
+
 参考：https://docs.open.alipay.com/204/105295/
 
-1、引入系统库
-左侧目录中选中工程名，在TARGETS->Build Phases-> Link Binary With Libaries中点击“+”按钮，在弹出的窗口中查找并选择所需的库（见下图），单击“Add”按钮，将库文件添加到工程中。
+##### 1、引入系统库及支付宝SDK
+
+左侧目录中选中工程名，在`TARGETS->Build Phases-> Link Binary With Libaries`中点击`“+”`按钮，在弹出的窗口中查找并选择所需的库（见下图），单击`“Add”`按钮，将库文件添加到工程中。
+
+- libc++.tbd
+- libz.tbd
+- SystemConfiguration.framework
+- CoreTelephony.framework
+- QuartzCore.framework
+- CoreText.framework
+- CoreGraphics.framework
+- UIKit.framework
+- Foundation.framework
+- CFNetwork.framework
+- CoreMotion.framework
+- AlipaySDK.framework
 
 ![](http://upload-images.jianshu.io/upload_images/2093433-0d20a15bea8a4016.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 其中，需要注意的是：
-如果是Xcode 7.0之后的版本，需要添加libc++.tbd、libz.tbd；
-如果是Xcode 7.0之前的版本，需要添加libc++.dylib、libz.dylib（如下图）。
+如果是`Xcode 7.0`之后的版本，需要添加`libc++.tbd`、`libz.tbd`；
+如果是`Xcode 7.0`之前的版本，需要添加`libc++.dylib`、`libz.dylib`（如下图）。
 
 ![](http://upload-images.jianshu.io/upload_images/2093433-1610b76227e68f9f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-2、环境配置
-在Xcode中，选择你的工程设置项，选中“TARGETS”一栏，在“info”标签栏的“URL type“添加“URL scheme”为你所定义的名称
+##### 2、环境配置
+
+在`Xcode`中，选择你的工程设置项，选中`“TARGETS”`一栏，在`“info”`标签栏的`“URL type”`添加`“URL scheme”`为你所定义的名称
 
 ![](http://upload-images.jianshu.io/upload_images/2093433-8677477232f6648d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 #### 三、简单使用
 
-1、重写AppDelegate的openURL方法：
+##### 方法
+
+Event Name | Returns | Notes 
+------ | ---- | -------
+pay | result | 支付
+
+##### 1、重写AppDelegate的openURL方法：
+
 ```
 #import "Alipay.h"
 
@@ -74,7 +99,9 @@ return NO;
 }
 }
 ```
-2、js文件
+
+##### 2、js文件
+
 ```
 /**
 * Sample React Native App
@@ -125,7 +152,7 @@ return (
 
 <Text style={styles.pageTitle}>Alipay SDK for React Native (iOS)</Text>
 
-<TouchableHighlight
+<TouchableHighlight 
 style={styles.button} underlayColor="#f38"
 onPress={this.Alipay}>
 <Text style={styles.buttonTitle}>Alipay</Text>
@@ -161,5 +188,4 @@ color: '#fff'
 }
 
 });
-
 ```
